@@ -1,0 +1,57 @@
+[
+  {
+    "id": "jp-1",
+    "nombre": "Juan Pablo",
+    "acudiente": "Mamá",
+    "telefono": "3225940033",
+    "barrio": "El Turbai",
+    "ruta": "Bachillerato 1",
+    "ordenRecogida": 1,
+    "ordenDejada": 3,
+    "nota": "Recoger frente a la tienda"
+  },
+  {
+    "id": "nb-1",
+    "nombre": "Nicolás Bedoya",
+    "acudiente": "Mamá",
+    "telefono": "3128840559",
+    "barrio": "El Turbai",
+    "ruta": "Bachillerato 1",
+    "ordenRecogida": 2,
+    "ordenDejada": 2,
+    "nota": "Llamar al llegar"
+  },
+  {
+    "id": "dg-1",
+    "nombre": "Dilan Gañán",
+    "acudiente": "Abuela Teresa",
+    "telefono": "3206342481",
+    "barrio": "El Turbai",
+    "ruta": "Bachillerato 1",
+    "ordenRecogida": 3,
+    "ordenDejada": 1,
+    "nota": "Esperar 1 minuto"
+  },
+  {
+    "id": "sr-1",
+    "nombre": "Sofía Ramírez",
+    "acudiente": "Mamá",
+    "telefono": "3010000001",
+    "barrio": "Centro",
+    "ruta": "Primaria",
+    "ordenRecogida": 1,
+    "ordenDejada": 2,
+    "nota": "Portón azul"
+  },
+  {
+    "id": "ml-1",
+    "nombre": "Mateo López",
+    "acudiente": "Papá",
+    "telefono": "3010000002",
+    "barrio": "Villa Carolina",
+    "ruta": "Primaria",
+    "ordenRecogida": 2,
+    "ordenDejada": 1,
+    "nota": "Tocar timbre"
+  }
+]

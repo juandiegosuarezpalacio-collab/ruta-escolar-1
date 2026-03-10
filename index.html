@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ruta Escolar Montenegro</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Ruta escolar</p>
+        <h1>Montenegro</h1>
+      </div>
+      <div class="gps-pill" id="gpsEstado">GPS apagado</div>
+    </header>
+
+    <main class="page">
+      <section class="hero card">
+        <div>
+          <h2>Panel del conductor</h2>
+          <p id="resumenRuta">Carga la lista y elige una ruta para empezar.</p>
+        </div>
+        <div class="hero-actions">
+          <button class="btn primary" id="btnIniciarRuta">Iniciar ruta</button>
+          <button class="btn secondary" id="btnGPS">Activar GPS</button>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat card">
+          <span>Activos</span>
+          <strong id="statActivos">0</strong>
+        </article>
+        <article class="stat card">
+          <span>Pendientes</span>
+          <strong id="statPendientes">0</strong>
+        </article>
+        <article class="stat card">
+          <span>Completados</span>
+          <strong id="statCompletados">0</strong>
+        </article>
+      </section>
+
+      <section class="card control-card">
+        <div class="section-title-row">
+          <h3>Control de ruta</h3>
+          <span class="badge" id="badgeModo">Demo</span>
+        </div>
+        <div class="grid-2">
+          <label>
+            Ruta
+            <select id="filtroRuta"></select>
+          </label>
+          <label>
+            Tono
+            <select id="tonoMensajes">
+              <option value="cercano">Cercano</option>
+              <option value="formal">Formal</option>
+              <option value="breve">Breve</option>
+            </select>
+          </label>
+        </div>
+        <div class="grid-2">
+          <label>
+            Canal de envío
+            <select id="modoEnvio">
+              <option value="demo">Demo</option>
+              <option value="whatsapp">Abrir WhatsApp</option>
+              <option value="business">WhatsApp Business</option>
+            </select>
+          </label>
+          <label>
+            Orden visible
+            <select id="tipoOrden">
+              <option value="recogida">Recogida</option>
+              <option value="dejada">Dejada</option>
+            </select>
+          </label>
+        </div>
+        <div class="button-grid">
+          <button class="btn primary" id="btnAlistamiento">Avisar alistamiento</button>
+          <button class="btn secondary" id="btnBarrio">Avisar barrio actual</button>
+          <button class="btn secondary" id="btnSiguiente">Siguiente estudiante</button>
+          <button class="btn secondary" id="btnSubio">Estudiante subió</button>
+          <button class="btn accent" id="btnLlegadaColegio">Llegada al colegio</button>
+          <button class="btn accent" id="btnEntrega">Entrega del estudiante</button>
+        </div>
+      </section>
+
+      <section class="card current-card">
+        <div class="section-title-row">
+          <h3>Estudiante actual</h3>
+          <span class="badge soft" id="badgeRutaActual">Sin iniciar</span>
+        </div>
+        <div id="estudianteActual" class="current-empty">No hay estudiante seleccionado.</div>
+      </section>
+
+      <section class="card">
+        <div class="section-title-row">
+          <h3>WhatsApp y backend</h3>
+          <span class="mini-status" id="estadoBackend">Sin probar</span>
+        </div>
+        <div class="grid-2">
+          <label>
+            URL backend
+            <input id="backendUrl" placeholder="https://tu-worker.workers.dev" />
+          </label>
+          <label>
+            API key
+            <input id="backendKey" placeholder="Tu clave" />
+          </label>
+        </div>
+        <div class="button-row">
+          <button class="btn secondary" id="btnGuardarBackend">Guardar</button>
+          <button class="btn secondary" id="btnProbarBackend">Probar conexión</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title-row">
+          <h3>Vista previa del mensaje</h3>
+          <button class="text-btn" id="btnMejorarMensaje">Mejorar con IA</button>
+        </div>
+        <label>
+          Tipo de mensaje
+          <select id="tipoMensaje">
+            <option value="alistamiento">Alistamiento</option>
+            <option value="barrio">Ingreso al barrio</option>
+            <option value="cerca">Ruta cerca</option>
+            <option value="subio">Estudiante subió</option>
+            <option value="llegadaColegio">Llegada al colegio</option>
+            <option value="entrega">Entrega</option>
+            <option value="retraso">Retraso</option>
+            <option value="personalizado">Personalizado</option>
+          </select>
+        </label>
+        <textarea id="previewMensaje" rows="8" placeholder="Aquí verás el mensaje..."></textarea>
+        <div class="button-row">
+          <button class="btn secondary" id="btnGenerarPreview">Generar</button>
+          <button class="btn secondary" id="btnEnviarActual">Enviar al actual</button>
+          <button class="btn primary" id="btnEnviarRuta">Enviar a toda la ruta</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title-row">
+          <h3>Orden del recorrido</h3>
+          <span class="badge soft" id="labelOrden">Recogida</span>
+        </div>
+        <div id="listaOrden" class="order-list"></div>
+      </section>
+
+      <section class="card">
+        <div class="section-title-row">
+          <h3>Estudiantes</h3>
+          <button class="text-btn" id="btnLimpiarFormulario">Limpiar</button>
+        </div>
+        <form id="formEstudiante" class="grid-2 form-grid">
+          <input type="hidden" id="estudianteId" />
+          <label>Nombre<input id="nombre" required /></label>
+          <label>Acudiente<input id="acudiente" required /></label>
+          <label>Teléfono<input id="telefono" required /></label>
+          <label>Barrio<input id="barrioInput" list="listaBarrios" required /></label>
+          <label>Ruta
+            <select id="rutaInput"></select>
+          </label>
+          <label>Orden recogida<input id="ordenRecogida" type="number" min="1" /></label>
+          <label>Orden dejada<input id="ordenDejada" type="number" min="1" /></label>
+          <label>Nota personalizada<input id="nota" /></label>
+          <button class="btn primary" type="submit">Guardar estudiante</button>
+          <button class="btn secondary" type="button" id="btnEliminar">Eliminar</button>
+        </form>
+        <datalist id="listaBarrios"></datalist>
+        <div id="tablaEstudiantes" class="student-list"></div>
+      </section>
+
+      <section class="card">
+        <div class="section-title-row">
+          <h3>Bitácora</h3>
+          <button class="text-btn" id="btnLimpiarLog">Limpiar</button>
+        </div>
+        <div id="logEventos" class="log-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="ia.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
